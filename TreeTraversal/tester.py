@@ -5,6 +5,9 @@
 # Do a Preorder and Postorder traversal of the tree
 # Print out tree for Preorder and Postorder and the answer for in order
 
+# https://www.tutorialspoint.com/python_data_structure/python_tree_traversal_algorithms.htm
+# https://mkyong.com/python/python-how-to-split-a-string/
+
 class Node:
 
     def __init__(self, value):
