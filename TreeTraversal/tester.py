@@ -5,51 +5,81 @@
 # Do a Preorder and Postorder traversal of the tree
 # Print out tree for Preorder and Postorder and the answer for in order
 
+
+# def split(input):
+#     expression = input
+#     characters = expression.split(" ", len(expression))
+#     return characters
+
 class Node:
 
     def __init__(self, data):
         self.left = None
         self.right = None
         self.data = data
+        self.operator = False
 
-    def split(self):
-        expression = "2 + 6 * 3 + 1 ^ 6 - 7"
-        data = expression.split(" ", 2)
-        for character in data:
-            print(character)
+def isOperator(c):
+    if c == '+' or c == '-' or c == '*' or c == '/' or c == '**':
+        return True
+    else:
+        return False
 
-    def insert(self, data):
-        if self.data:
-            if data < self.data:
-                self.left = Node(data)
-            else:
-                self.left.insert(data)
-        elif data > self.data:
-            if self.right is None:
-                self.right = Node(data)
-            else:
-                self.right.insert(data)
+
+def makeTree(expression):
+    stack = []
+
+    for character in expression:
+        if not isOperator(character):
+            t = Node(character)
+            stack.append(t)
         else:
-            self.data = data
+            t = Node(character)
+            t1 = stack.pop()
+            t2 = stack.pop()
 
+            t.right = t1
+            t.left = t2
 
-    def isOperator(c):
-        if c == '+' or c == '-' or c == '*' or c == '/' or c == '^':
-            return True
-        else:
-            return False
+            stack.append(t)
 
-    def preorderTraversal(self, root):
-        result = []
-        if root:
-            result.append(root.data)
-            result = result + self.preorderTraversal(root.left)
-            result = result + self.preorderTraversal(root.right)
-        return result
+    t = stack.pop()
+    return t
+
+    # def insert(self, data):
+    #     if self.data:
+    #         if data < self.data:
+    #             self.left = Node(data)
+    #         else:
+    #             self.left.insert(data)
+    #     elif data > self.data:
+    #         if self.right is None:
+    #             self.right = Node(data)
+    #         else:
+    #             self.right.insert(data)
+    #     else:
+    #         self.data = data
+    #
+    # def isOperator(c):
+    #     if c == '+' or c == '-' or c == '*' or c == '/' or c == '**':
+    #         return True
+    #     else:
+    #         return False
+    #
+    # def preorderTraversal(self, root):
+    #     result = []
+    #     if root:
+    #         result.append(root.data)
+    #         result = result + self.preorderTraversal(root.left)
+    #         result = result + self.preorderTraversal(root.right)
+    #     return result
 
 
 if __name__ == '__main__':
-    expression = "2 + 6 * 3 + 1 ^ 6 - 7"
-    data = expression.split(" ", len(expression))
-    for character in data:
-        print(character)
+
+    print("Please type expression with no parentheses")
+    print("Separate numbers & operators with spaces")
+    print("Example: 2 + 5 * 3 + 1 ^ 6 - 7")
+    expression = input()
+    r = makeTree(expression.replace(" ",""))
+
