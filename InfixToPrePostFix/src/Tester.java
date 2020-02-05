@@ -1,5 +1,5 @@
 import java.text.DecimalFormat;
-
+import javax.swing.*;
 
 public class Tester {
 
@@ -10,15 +10,31 @@ public class Tester {
         Evaluation evaluation = new Evaluation();
         Validator validator = new Validator();
         DecimalFormat df = new DecimalFormat("0.00");
-        String expression;
+        String post, pre, answer, expression;
+
+
+//        String input = JOptionPane.showInputDialog(null, "Enter your expression");
+
+
 
 
         expression = validator.inputValidation();
 
 
-        System.out.println("Postfix: " + postfixTree.infixToPostFix(expression));
-        System.out.println("Prefix: " + prefixTree.infixToPreFix(expression));
-        System.out.println("Answer: " + df.format(evaluation.eval(expression)));
+//        System.out.println("Postfix: " + postfixTree.infixToPostFix(expression));
+//        System.out.println("Prefix: " + prefixTree.infixToPreFix(expression));
+//        System.out.println("Answer: " + df.format(evaluation.eval(expression)));
+
+        post = postfixTree.infixToPostFix(expression);
+        pre = String.valueOf(prefixTree.infixToPreFix(expression));
+        answer = df.format(evaluation.eval(expression));
+
+
+        JOptionPane.showMessageDialog(null, "Postfix " + post);
+        JOptionPane.showMessageDialog(null, "Prefix " + pre);
+        JOptionPane.showMessageDialog(null, "Answer " + answer);
+        System.exit(0);
+
 
 
     }

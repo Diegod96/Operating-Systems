@@ -46,7 +46,7 @@ public class InfixToPrefix<E> {
         for (int i = 0; i < characters.length; i++) {
             char character = characters[i];
 
-            //check if character is operator or operand
+            // Check if current character is an operator
             if (getPriority(character) > 0) {
                 while (!stack.isEmpty() && getPriority(stack.peek()) >= getPriority(character)) {
                     prefix.append(stack.pop());
@@ -61,7 +61,7 @@ public class InfixToPrefix<E> {
             } else if (character == '(') {
                 stack.push(character);
             } else {
-                //character is neither operator nor "("
+                // Character is a number
                 prefix.append(character);
             }
         }

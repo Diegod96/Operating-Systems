@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.*;
 
 
@@ -12,31 +13,35 @@ class Validator {
     public String inputValidation() {
         String expression;
         boolean isExpression;
-        Scanner keyboard = new Scanner(System.in);
+//        Scanner keyboard = new Scanner(System.in);
+        String text = "Please enter your expression in the following format."
+                + "Spaces will separate operands and operators."
+                + "No Parenthesis."
+                + "Example: 2 + 5 * 3 + 1 ^ 6 - 7";
 
-        System.out.println("Please enter your expression in the following format");
-        System.out.println("Spaces will separate operands and operators");
-        System.out.println("No Parenthesis");
-        System.out.println("Example: 2 + 5 * 3 + 1 ^ 6 - 7");
+        JOptionPane.showMessageDialog(null, text);
+//        System.out.println("Spaces will separate operands and operators");
+//        System.out.println("No Parenthesis");
+//        System.out.println("Example: 2 + 5 * 3 + 1 ^ 6 - 7");
 
         do {
-            System.out.print("Enter expression: ");
-            expression = keyboard.nextLine().replaceAll(" ", "");
+//            System.out.print("Enter expression: ");
+            expression = JOptionPane.showInputDialog(null, "Enter your expression");
 
             //Regex pattern to see if expression contains any letters
             if (expression.matches(".*[a-zA-Z]+.*")) {
-                System.out.println("Please enter only numbers");
+                JOptionPane.showMessageDialog(null,"Please enter only numbers");
                 isExpression = false;
             }
             //Checks if expression contains any parenthesis
             else if (expression.contains(")") || expression.contains("(")) {
-                System.out.println("Please do not enter parenthesis");
+                JOptionPane.showMessageDialog(null,"Please do not enter parenthesis");
                 isExpression = false;
 
             }
             //Checks to make sure expression contains an operator
             else if (!expression.contains("+") && !expression.contains("-") && !expression.contains("*") && !expression.contains("/") && !expression.contains("^") ){
-                System.out.println("Please enter an operator");
+                JOptionPane.showMessageDialog(null,"Please enter an operator");
                 isExpression = false;
 
             }
@@ -44,7 +49,7 @@ class Validator {
             //Ex: user can input: "+"
             //This will pass the first three checks but fail here
             else if(!expression.matches(".*\\d.*")){
-                System.out.println("Please enter a number");
+                JOptionPane.showMessageDialog(null,"Please enter a number");
                 isExpression = false;
             }else{
                 isExpression = true;
