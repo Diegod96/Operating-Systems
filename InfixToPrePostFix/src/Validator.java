@@ -15,9 +15,9 @@ class Validator {
         boolean isExpression;
 //        Scanner keyboard = new Scanner(System.in);
         String text = "Please enter your expression in the following format."
-                + "Spaces will separate operands and operators."
-                + "No Parenthesis."
-                + "Example: 2 + 5 * 3 + 1 ^ 6 - 7";
+                + '\n' + "Spaces will separate operands and operators."
+                + '\n' + "No Parenthesis."
+                + '\n' + "Example: 2 + 5 * 3 + 1 ^ 6 - 7";
 
         JOptionPane.showMessageDialog(null, text);
 //        System.out.println("Spaces will separate operands and operators");

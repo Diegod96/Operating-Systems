@@ -10,7 +10,7 @@ public class Tester {
         Evaluation evaluation = new Evaluation();
         Validator validator = new Validator();
         DecimalFormat df = new DecimalFormat("0.00");
-        String post, pre, answer, expression;
+        String post, pre, answer, expression, text;
 
 
 //        String input = JOptionPane.showInputDialog(null, "Enter your expression");
@@ -30,9 +30,13 @@ public class Tester {
         answer = df.format(evaluation.eval(expression));
 
 
-        JOptionPane.showMessageDialog(null, "Postfix " + post);
-        JOptionPane.showMessageDialog(null, "Prefix " + pre);
-        JOptionPane.showMessageDialog(null, "Answer " + answer);
+
+
+        JOptionPane.showMessageDialog(null, "Postfix " + post
+        + '\n' + "Prefix " + pre
+        + '\n' + "Answer " + answer);
+//        JOptionPane.showMessageDialog(null, "Prefix " + pre);
+//        JOptionPane.showMessageDialog(null, "Answer " + answer);
         System.exit(0);
 
 
