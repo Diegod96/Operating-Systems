@@ -34,7 +34,7 @@ public class InfixToPostfix<E> {
         for (int i = 0; i < expression.length(); i++) {
             char charAt = expression.charAt(i);
 
-            //check if char is operator
+            // Check if current character is an operator
             if (getPrioity(charAt) > 0) {
                 while (!stack.isEmpty() && getPrioity(stack.peek()) >= getPrioity(charAt)) {
                     postfix.append(stack.pop());
@@ -49,7 +49,7 @@ public class InfixToPostfix<E> {
             } else if (charAt == '(') {
                 stack.push(charAt);
             } else {
-                //character is neither operator nor ( 
+                // Character is a number
                 postfix.append(charAt);
             }
         }
