@@ -32,9 +32,9 @@ public class Tester {
 
 
 
-        JOptionPane.showMessageDialog(null, "Postfix " + post
-        + '\n' + "Prefix " + pre
-        + '\n' + "Answer " + answer);
+        JOptionPane.showMessageDialog(null, "Postfix: " + post
+        + '\n' + "Prefix: " + pre
+        + '\n' + "Answer: " + answer);
 //        JOptionPane.showMessageDialog(null, "Prefix " + pre);
 //        JOptionPane.showMessageDialog(null, "Answer " + answer);
         System.exit(0);
