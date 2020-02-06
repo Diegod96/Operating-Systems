@@ -19,16 +19,10 @@ class Validator {
                 + '\n' + "No Parenthesis."
                 + '\n' + "Example: 2 + 5 * 3 + 1 ^ 6 - 7";
 
-<<<<<<< HEAD
-        System.out.println("Please enter your expression in the following format.");
-        System.out.println("Spaces will separate operands and operators. No Parenthesis.");
-        System.out.println("Example: 2 + 5 * 3 + 1 ^ 6 - 7");
-=======
         JOptionPane.showMessageDialog(null, text);
 //        System.out.println("Spaces will separate operands and operators");
 //        System.out.println("No Parenthesis");
 //        System.out.println("Example: 2 + 5 * 3 + 1 ^ 6 - 7");
->>>>>>> dd8b27fe23f36d389c7c272e48d218738f128fcf
 
         do {
 //            System.out.print("Enter expression: ");
@@ -60,15 +54,11 @@ class Validator {
             }else{
                 isExpression = true;
             }
-        //Will keep on looping until the user enters a valid expression
+            //Will keep on looping until the user enters a valid expression
         } while (!isExpression);
         return expression;
     }
 }
-
-
-
-
 
 
 
