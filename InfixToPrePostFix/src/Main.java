@@ -1,18 +1,20 @@
-import java.io.BufferedReader;
+
 import java.text.DecimalFormat;
 import javax.swing.*;
 
-public class Tester {
+public class Main {
+
+
 
     public static void main(String[] args){
 
         InfixToPrefix<String> prefixTree = new InfixToPrefix<>();
         InfixToPostfix<String> postfixTree = new InfixToPostfix<>();
-        Tree tree = new Tree();
         Evaluation evaluation = new Evaluation();
         Validator validator = new Validator();
         DecimalFormat df = new DecimalFormat("0.0");
         String post, pre, answer, expression;
+
 
 
 //        String input = JOptionPane.showInputDialog(null, "Enter your expression");
@@ -27,11 +29,9 @@ public class Tester {
 //        System.out.println("Prefix: " + prefixTree.infixToPreFix(expression));
 //        System.out.println("Answer: " + df.format(evaluation.eval(expression)));
 
-        post = postfixTree.infixToPostFix(expression);
-        pre = String.valueOf(prefixTree.infixToPreFix(expression));
+        post = postfixTree.infixToPostFix(expression).replaceAll(" ", "");
+        pre = String.valueOf(prefixTree.infixToPreFix(expression)).replaceAll(" ", "");
         answer = df.format(evaluation.eval(expression));
-
-
 
 
         JOptionPane.showMessageDialog(null, "Postfix: " + post
@@ -39,6 +39,7 @@ public class Tester {
                 + '\n' + "Answer: " + answer);
 //        JOptionPane.showMessageDialog(null, "Prefix " + pre);
 //        JOptionPane.showMessageDialog(null, "Answer " + answer);
+
 
 
 
