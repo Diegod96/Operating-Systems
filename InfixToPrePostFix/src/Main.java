@@ -13,7 +13,8 @@ public class Main {
         Evaluation evaluation = new Evaluation();
         Validator validator = new Validator();
         DecimalFormat df = new DecimalFormat("0.0");
-        String post, pre, answer, expression;
+        makeTree modder = new makeTree();
+        String post, pre, answer, expression, modExpression, raw;
 
 
 
@@ -32,11 +33,15 @@ public class Main {
         post = postfixTree.infixToPostFix(expression).replaceAll(" ", "");
         pre = String.valueOf(prefixTree.infixToPreFix(expression)).replaceAll(" ", "");
         answer = df.format(evaluation.eval(expression));
+        raw = String.valueOf(prefixTree.infixToPreFix(expression));
+        modExpression = modder.converter("- + 1 2 ^ 3 7");
+
 
 
         JOptionPane.showMessageDialog(null, "Postfix: " + post
                 + '\n' + "Prefix: " + pre
-                + '\n' + "Answer: " + answer);
+                + '\n' + "Answer: " + answer
+                + '\n' + "Tree: " + modExpression);
 //        JOptionPane.showMessageDialog(null, "Prefix " + pre);
 //        JOptionPane.showMessageDialog(null, "Answer " + answer);
 
