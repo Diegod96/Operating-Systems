@@ -1,15 +1,21 @@
 import javax.swing.*;
 import java.util.*;
+import java.util.Arrays;
 
 
 class Validator {
+    String x;
 
 
     /**
      * Validates user input to make sure it adheres to following format
-     * 2 + 5 * 3 + 1 ^ 6 - 7
+     *
      * @return validated string expression
      */
+
+    public void removeElement(char[] arr, int removedIdx) {
+        System.arraycopy(arr, removedIdx + 1, arr, removedIdx, arr.length - 1 - removedIdx);
+    }
     public String inputValidation() {
         String expression;
         boolean isExpression;
@@ -56,7 +62,24 @@ class Validator {
             }
             //Will keep on looping until the user enters a valid expression
         } while (!isExpression);
-        return expression;
+        String noSpace = expression.replaceAll(" ", "");
+        char[] e = noSpace.toCharArray();
+
+        for (int i = 0; i < e.length; i++){
+            if (e[i+1] == '-' && e[i+2] == '-'){
+                e[i+1] = '+';
+                e[i+2] = ' ';
+                String x = String.valueOf(e);
+                x = x.replaceAll( " ", "");
+                return x;
+
+            }
+
+            }
+
+        return "0";
+
+
     }
 }
 

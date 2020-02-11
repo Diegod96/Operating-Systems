@@ -8,12 +8,11 @@ public class Main {
 
     public static void main(String[] args){
 
-        InfixToPrefix<String> prefixTree = new InfixToPrefix<>();
-        InfixToPostfix<String> postfixTree = new InfixToPostfix<>();
+        Postfix<String> postfixTree = new Postfix<>();
         Evaluation evaluation = new Evaluation();
         Validator validator = new Validator();
         DecimalFormat df = new DecimalFormat("0.0");
-        makeTree modder = new makeTree();
+        Format format = new Format();
         String post, pre, answer, expression, modExpression, raw;
 
 
@@ -31,10 +30,12 @@ public class Main {
 //        System.out.println("Answer: " + df.format(evaluation.eval(expression)));
 
         post = postfixTree.infixToPostFix(expression).replaceAll(" ", "");
-        pre = String.valueOf(prefixTree.infixToPreFix(expression)).replaceAll(" ", "");
+        expression = expression.replaceAll(" ", "");
+        pre = Prefix.infixToPrefix(expression);
+        pre = pre.replaceAll("", " ");
         answer = df.format(evaluation.eval(expression));
-        raw = String.valueOf(prefixTree.infixToPreFix(expression));
-        modExpression = modder.converter("- + 1 2 ^ 3 7");
+//        raw = String.valueOf(prefixTree.infixToPrefix(expression));
+        modExpression = format.converter(pre);
 
 
 

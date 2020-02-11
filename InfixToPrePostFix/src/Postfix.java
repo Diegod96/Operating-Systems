@@ -1,7 +1,7 @@
 
 import java.util.Stack;
 
-public class InfixToPostfix<E> {
+public class Postfix<E> {
 
     /**
      * Evaluates infix notation expression and converts it to prefix notation

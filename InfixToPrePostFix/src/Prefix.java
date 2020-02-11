@@ -1,13 +1,11 @@
 // Java program to convert
 // infix to prefix.
 import java.util.*;
-class GFG
-{
+class Prefix {
     // Function to check if
 // given character is
 // an operator or not.
-    static boolean isOperator(char c)
-    {
+    static boolean isOperator(char c) {
         return (!(c >= 'a' && c <= 'z') &&
                 !(c >= '0' && c <= '9') &&
                 !(c >= 'A' && c <= 'Z'));
@@ -15,8 +13,7 @@ class GFG
 
     // Function to find priority
 // of given operator.
-    static int getPriority(char C)
-    {
+    static int getPriority(char C) {
         if (C == '-' || C == '+')
             return 1;
         else if (C == '*' || C == '/')
@@ -28,22 +25,19 @@ class GFG
 
     // Function that converts infix
 // expression to prefix expression.
-    static String infixToPrefix(String infix)
-    {
+    static String infixToPrefix(String infix) {
         // stack for operators.
         Stack<Character> operators = new Stack<Character>();
 
         // stack for operands.
         Stack<String> operands = new Stack<String>();
 
-        for (int i = 0; i < infix.length(); i++)
-        {
+        for (int i = 0; i < infix.length(); i++) {
 
             // If current character is an
             // opening bracket, then
             // push into the operators stack.
-            if (infix.charAt(i) == '(')
-            {
+            if (infix.charAt(i) == '(') {
                 operators.push(infix.charAt(i));
             }
 
@@ -53,11 +47,9 @@ class GFG
             // in operands stack until
             // matching opening bracket is
             // not found.
-            else if (infix.charAt(i) == ')')
-            {
+            else if (infix.charAt(i) == ')') {
                 while (!operators.empty() &&
-                        operators.peek() != '(')
-                {
+                        operators.peek() != '(') {
 
                     // operand 1
                     String op1 = operands.peek();
@@ -86,8 +78,7 @@ class GFG
             // If current character is an
             // operand then push it into
             // operands stack.
-            else if (!isOperator(infix.charAt(i)))
-            {
+            else if (!isOperator(infix.charAt(i))) {
                 operands.push(infix.charAt(i) + "");
             }
 
@@ -97,12 +88,10 @@ class GFG
             // high priority operators from
             // operators stack and pushing
             // result in operands stack.
-            else
-            {
+            else {
                 while (!operators.empty() &&
                         getPriority(infix.charAt(i)) <=
-                                getPriority(operators.peek()))
-                {
+                                getPriority(operators.peek())) {
 
                     String op1 = operands.peek();
                     operands.pop();
@@ -125,8 +114,7 @@ class GFG
         // stack until it is empty and
         // operation in add result of
         // each pop operands stack.
-        while (!operators.empty())
-        {
+        while (!operators.empty()) {
             String op1 = operands.peek();
             operands.pop();
 
@@ -142,14 +130,16 @@ class GFG
 
         // Final prefix expression is
         // present in operands stack.
-        return operands.peek();
-    }
-
-    // Driver code
-    public static void main(String args[])
-    {
-        String s = "1+2-3^7";
-        System.out.println( infixToPrefix(s));
+        String x = operands.peek();
+        return x;
     }
 }
+
+//    // Driver code
+//    public static void main(String args[])
+//    {
+//        String s = "1+2-3^7";
+//        System.out.println( infixToPrefix(s));
+//    }
+//}
 
