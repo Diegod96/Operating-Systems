@@ -1,9 +1,4 @@
 import javax.swing.*;
-import java.util.*;
-import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 
 class Validator {
 
@@ -17,25 +12,13 @@ class Validator {
     public String inputValidation() {
         String expression;
         boolean isExpression;
-        String patternStr = "- -";
-        Pattern pattern = Pattern.compile(patternStr);
-
-        Matcher matcher = pattern.matcher(expression);
-        boolean matchFound = matcher.matches();
-
-//        Scanner keyboard = new Scanner(System.in);
         String text = "Please enter your expression in the following format."
                 + '\n' + "Spaces will separate operands and operators."
                 + '\n' + "No Parenthesis."
                 + '\n' + "Example: 2 + 5 * 3 + 1 ^ 6 - 7";
 
         JOptionPane.showMessageDialog(null, text);
-//        System.out.println("Spaces will separate operands and operators");
-//        System.out.println("No Parenthesis");
-//        System.out.println("Example: 2 + 5 * 3 + 1 ^ 6 - 7");
-
         do {
-//            System.out.print("Enter expression: ");
             expression = JOptionPane.showInputDialog(null, "Enter your expression");
 
             //Regex pattern to see if expression contains any letters
@@ -47,13 +30,11 @@ class Validator {
             else if (expression.contains(")") || expression.contains("(")) {
                 JOptionPane.showMessageDialog(null, "Please do not enter parenthesis");
                 isExpression = false;
-
             }
             //Checks to make sure expression contains an operator
             else if (!expression.contains("+") && !expression.contains("-") && !expression.contains("*") && !expression.contains("/") && !expression.contains("^")) {
                 JOptionPane.showMessageDialog(null, "Please enter an operator");
                 isExpression = false;
-
             }
             //Checks to make sure the expression contains numbers
             //Ex: user can input: "+"
@@ -61,8 +42,9 @@ class Validator {
             else if (!expression.matches(".*\\d.*")) {
                 JOptionPane.showMessageDialog(null, "Please enter a number");
                 isExpression = false;
-            } else if (matchFound) {
-                JOptionPane.showMessageDialog(null, "Please + instead of --");
+            //Checks if user input contains "--" instead of "+"
+            } else if (expression.contains("- -") || expression.contains("--")) {
+                JOptionPane.showMessageDialog(null, "Please use '+' instead of '--'");
                 isExpression = false;
             } else {
                 isExpression = true;

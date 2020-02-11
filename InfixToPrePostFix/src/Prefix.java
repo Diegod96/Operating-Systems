@@ -1,5 +1,4 @@
-// Java program to convert
-// infix to prefix.
+
 import java.util.*;
 class Prefix {
     // Function to check if
@@ -7,8 +6,7 @@ class Prefix {
 // an operator or not.
     static boolean isOperator(char c) {
         return (!(c >= 'a' && c <= 'z') &&
-                !(c >= '0' && c <= '9') &&
-                !(c >= 'A' && c <= 'Z'));
+                !(c >= '0' && c <= '9'));
     }
 
     // Function to find priority
@@ -134,12 +132,3 @@ class Prefix {
         return x;
     }
 }
-
-//    // Driver code
-//    public static void main(String args[])
-//    {
-//        String s = "1+2-3^7";
-//        System.out.println( infixToPrefix(s));
-//    }
-//}
-
