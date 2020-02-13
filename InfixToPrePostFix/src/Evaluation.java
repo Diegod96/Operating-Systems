@@ -62,16 +62,8 @@ public class Evaluation {
                 } else if ((ch >= '0' && ch <= '9') || ch == '.') { // numbers
                     while ((ch >= '0' && ch <= '9') || ch == '.') nextChar();
                     answer = Double.parseDouble(expression.substring(startPos, this.pos));
-                } else if (ch >= 'a' && ch <= 'z') { // functions
-                    while (ch >= 'a' && ch <= 'z') nextChar();
-                    String func = expression.substring(startPos, this.pos);
-                    answer = parseFactor();
-                    if (func.equals("sqrt")) answer = Math.sqrt(answer);
-                    else if (func.equals("sin")) answer = Math.sin(Math.toRadians(answer));
-                    else if (func.equals("cos")) answer = Math.cos(Math.toRadians(answer));
-                    else if (func.equals("tan")) answer = Math.tan(Math.toRadians(answer));
-                    else throw new RuntimeException("Unknown function: " + func);
-                } else {
+
+               }else {
                     throw new RuntimeException("Unexpected: " + (char)ch);
                 }
 

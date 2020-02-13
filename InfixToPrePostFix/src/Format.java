@@ -2,6 +2,13 @@ import java.util.Arrays;
 
 public class Format {
 
+    /**
+     * Receives the prefix expression
+     * Converts the prefix expression to a tree using bracket notation
+     * @param input
+     * @return result
+     */
+
 
     public String converter(String input) {
         String result = null;
@@ -9,7 +16,7 @@ public class Format {
         char[] x = input.toCharArray();
         char[] characterArray = Arrays.copyOfRange(x, 1, x.length);
 
-
+        // Loop through the char array until we hit an index out of bounds error
         try {
 
 
@@ -49,7 +56,7 @@ public class Format {
                 } else if (characterArray[i + 5] == ',' && Character.isDigit(characterArray[i + 6]) && Character.isWhitespace(characterArray[i + 7]) && Character.isDigit(characterArray[i + 8])) {
                     characterArray[i + 7] = ')';
 
-                }else {
+                }else{
                     int end = characterArray.length;
                     characterArray[end - 1] = ')';
                 }

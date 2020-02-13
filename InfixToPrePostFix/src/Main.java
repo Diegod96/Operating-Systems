@@ -11,7 +11,7 @@ public class Main {
         Validator validator = new Validator();
         DecimalFormat df = new DecimalFormat("0.0");
         Format format = new Format();
-        String post, pre, answer, expression, modExpression, raw;
+        String post, pre, answer, expression, modExpression;
 
         expression = validator.inputValidation();
 
@@ -21,6 +21,7 @@ public class Main {
         pre = pre.replaceAll("", " ");
         answer = df.format(evaluation.eval(expression));
         modExpression = format.converter(pre);
+        modExpression = modExpression.replaceAll(" ", ")");
 
 
 

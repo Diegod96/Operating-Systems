@@ -1,94 +1,78 @@
 
 import java.util.*;
+
+
+
 class Prefix {
-    // Function to check if
-// given character is
-// an operator or not.
-    static boolean isOperator(char c) {
-        return (!(c >= 'a' && c <= 'z') &&
-                !(c >= '0' && c <= '9'));
+
+
+    // Checks if character is an operand
+    static boolean isOperand(char character) {
+        return
+                !(character >= '0' && character <= '9');
     }
 
-    // Function to find priority
-// of given operator.
-    static int getPriority(char C) {
-        if (C == '-' || C == '+')
+
+    // Gets priotity of an operator
+    static int getPriority(char operator) {
+        if (operator == '-' || operator == '+')
             return 1;
-        else if (C == '*' || C == '/')
+        else if (operator == '*' || operator == '/')
             return 2;
-        else if (C == '^')
+        else if (operator == '^')
             return 3;
         return 0;
     }
 
-    // Function that converts infix
-// expression to prefix expression.
-    static String infixToPrefix(String infix) {
-        // stack for operators.
-        Stack<Character> operators = new Stack<Character>();
+    /**
+     * Converts infix expression to prefix notation
+     * @param infixExpression
+     * @return prefixExpression
+     */
+    static String infixToPrefix(String infixExpression) {
 
-        // stack for operands.
+        Stack<Character> operators = new Stack<Character>();
         Stack<String> operands = new Stack<String>();
 
-        for (int i = 0; i < infix.length(); i++) {
+        for (int i = 0; i < infixExpression.length(); i++) {
 
-            // If current character is an
-            // opening bracket, then
-            // push into the operators stack.
-            if (infix.charAt(i) == '(') {
-                operators.push(infix.charAt(i));
+
+            if (infixExpression.charAt(i) == '(') {
+                operators.push(infixExpression.charAt(i));
             }
 
-            // If current character is a
-            // closing bracket, then pop from
-            // both stacks and push result
-            // in operands stack until
-            // matching opening bracket is
-            // not found.
-            else if (infix.charAt(i) == ')') {
+            else if (infixExpression.charAt(i) == ')') {
                 while (!operators.empty() &&
                         operators.peek() != '(') {
 
-                    // operand 1
+
                     String op1 = operands.peek();
                     operands.pop();
 
-                    // operand 2
                     String op2 = operands.peek();
                     operands.pop();
 
-                    // operator
                     char op = operators.peek();
                     operators.pop();
 
-                    // Add operands and operator
-                    // in form operator +
-                    // operand1 + operand2.
+
                     String tmp = op + op2 + op1;
                     operands.push(tmp);
                 }
 
-                // Pop opening bracket
-                // from stack.
+
                 operators.pop();
             }
 
-            // If current character is an
-            // operand then push it into
-            // operands stack.
-            else if (!isOperator(infix.charAt(i))) {
-                operands.push(infix.charAt(i) + "");
+
+            else if (!isOperand(infixExpression.charAt(i))) {
+                operands.push(infixExpression.charAt(i) + "");
             }
 
-            // If current character is an
-            // operator, then push it into
-            // operators stack after popping
-            // high priority operators from
-            // operators stack and pushing
-            // result in operands stack.
+
             else {
                 while (!operators.empty() &&
-                        getPriority(infix.charAt(i)) <=
+                        getPriority(infixExpression.charAt(i)) <=
                                 getPriority(operators.peek())) {
 
                     String op1 = operands.peek();
@@ -104,14 +88,11 @@ class Prefix {
                     operands.push(tmp);
                 }
 
-                operators.push(infix.charAt(i));
+                operators.push(infixExpression.charAt(i));
             }
         }
 
-        // Pop operators from operators
-        // stack until it is empty and
-        // operation in add result of
-        // each pop operands stack.
+
         while (!operators.empty()) {
             String op1 = operands.peek();
             operands.pop();
@@ -126,9 +107,7 @@ class Prefix {
             operands.push(tmp);
         }
 
-        // Final prefix expression is
-        // present in operands stack.
-        String x = operands.peek();
-        return x;
+        String prefixExpression = operands.peek();
+        return prefixExpression;
     }
 }

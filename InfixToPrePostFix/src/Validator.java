@@ -20,6 +20,7 @@ class Validator {
         JOptionPane.showMessageDialog(null, text);
         do {
             expression = JOptionPane.showInputDialog(null, "Enter your expression");
+            String noSpaceExpression = expression.replaceAll(" ", "");
 
             //Regex pattern to see if expression contains any letters
             if (expression.matches(".*[a-zA-Z]+.*")) {
@@ -46,7 +47,14 @@ class Validator {
             } else if (expression.contains("- -") || expression.contains("--")) {
                 JOptionPane.showMessageDialog(null, "Please use '+' instead of '--'");
                 isExpression = false;
-            } else {
+            }
+
+            //Checks to see if expression is more than just a trivial expression like "1+2"
+            else if (noSpaceExpression.length() < 4){
+                JOptionPane.showMessageDialog(null, "Please enter an expression larger than three characters");
+                isExpression = false;
+            }
+            else {
                 isExpression = true;
             }
             //Will keep on looping until the user enters a valid expression
