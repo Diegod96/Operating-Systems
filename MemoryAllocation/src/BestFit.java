@@ -4,13 +4,11 @@ public class BestFit {
 
 
 
-    // Method to allocate memory to blocks as per Best fit
-    // algorithm
     static void bestFit(int blockSize[], int m, int processSize[],
                         int n)
     {
-        // Stores block id of the block allocated to a
-        // process
+        // Stores block id of the
+        // block allocated to a process
         int allocation[] = new int[n];
 
         int fragmentation[] = new int[n];

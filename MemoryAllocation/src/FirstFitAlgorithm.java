@@ -2,43 +2,37 @@ import java.util.Arrays;
 
 public class FirstFitAlgorithm {
 
-    // Method to allocate memory to
-    // blocks as per First fit algorithm
-    static void firstFit(int blockSize[], int m,
-                         int processSize[], int n)
-    {
+
+    static void firstFit(int partitionSize[], int x, int jobSize[], int y) {
+
         // Stores block id of the
         // block allocated to a process
-        int allocation[] = new int[n];
+        int allocation[] = new int[y];
 
-        int fragmentation[] = new int[n];
+        int fragmentation[] = new int[y];
 
-        int memorySize[] = new int[n];
-
-        int memoryAddress[] = new int[n];
+        int memorySize[] = new int[y];
 
 
-
-        // Initially no block is assigned to any process
+        // Initially set all blocks as not assigned "-1"
         for (int i = 0; i < allocation.length; i++)
             allocation[i] = -1;
 
-        // pick each process and find suitable blocks
-        // according to its size ad assign to it
-        for (int i = 0; i < n; i++)
+        // Loop through jobs and see which jobs size is less than the current partition size selected
+        for (int i = 0; i < y; i++)
         {
-            for (int j = 0; j < m; j++)
+            for (int j = 0; j < x; j++)
             {
-                if (blockSize[j] >= processSize[i])
+                if (partitionSize[j] >= jobSize[i])
                 {
-                    // allocate block j to p[i] process
+
                     allocation[i] = j;
 
-                    memorySize[i] = blockSize[j];
+                    memorySize[i] = partitionSize[j];
 
 
-                    // Reduce available memory in this block.
-                    fragmentation[i] = blockSize[j] -= processSize[i];
+                    // Add difference of specific allocation to fragmentation array
+                    fragmentation[i] = partitionSize[j] -= jobSize[i];
 
                     break;
                 }
@@ -46,10 +40,10 @@ public class FirstFitAlgorithm {
         }
 
         System.out.println(" Job #	    Job Size            Memory Size            Status              Fragmentation After Allocation");
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < y; i++)
         {
             System.out.print(" " + (i+1) + "              " +
-                    processSize[i] + "             " + memorySize[i]);
+                    jobSize[i] + "             " + memorySize[i]);
             if (allocation[i] != -1)
                 System.out.print("                       Busy");
             else
@@ -63,12 +57,12 @@ public class FirstFitAlgorithm {
     // Driver Code
     public static void main(String[] args)
     {
-        int blockSize[] = {100, 500, 200, 300, 600};
-        int processSize[] = {212, 417, 112, 426};
-        int m = blockSize.length;
-        int n = processSize.length;
+        int partitionSize[] = {100, 300, 200, 300, 700};
+        int jobSize[] = {212, 87, 112, 1000000};
+        int x = partitionSize.length;
+        int y = jobSize.length;
 
-        firstFit(blockSize, m, processSize, n);
+        firstFit(partitionSize, x, jobSize, y);
     }
 }
 
