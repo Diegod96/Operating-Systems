@@ -1,0 +1,1 @@
+To use the memory allocation programs, adjust the partition and job size in the main function.

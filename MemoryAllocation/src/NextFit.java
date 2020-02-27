@@ -2,50 +2,45 @@ import java.util.Arrays;
 
 public class NextFit {
 
-    // Function to allocate memory to blocks as per Next fit
-// algorithm
-    static void NextFit(int blockSize[], int m, int processSize[], int n) {
-        // Stores block id of the block allocated to a
-        // process
-        int allocation[] = new int[n], j = 0;
 
-        int fragmentation[] = new int[n];
+    static void nextFit(int partitionSize[], int x, int jobSize[], int y) {
 
-        int memorySize[] = new int[n];
+        int allocation[] = new int[y], j = 0;
 
-        // Initially no block is assigned to any process
+        int fragmentation[] = new int[y];
+
+        int memorySize[] = new int[y];
+
+        // Initially set all blocks as not assigned "-1"
         Arrays.fill(allocation, -1);
 
-        // pick each process and find suitable blocks
-        // according to its size ad assign to it
-        for (int i = 0; i < n; i++) {
+
+        // Loop through jobs and see which jobs size is less than the current partition size selected
+        for (int i = 0; i < y; i++) {
 
             // Do not start from beginning
-            while (j < m) {
+            while (j < x) {
 
-                if (blockSize[j] >= processSize[i]) {
+                if (partitionSize[j] >= jobSize[i]) {
 
-                    // allocate block j to p[i] process
+
                     allocation[i] = j;
-                    memorySize[i] = blockSize[j];
+                    memorySize[i] = partitionSize[j];
 
-                    // Reduce available memory in this block.
-                    fragmentation[i] = blockSize[j] -= processSize[i];
+                    // Add difference of specific allocation to fragmentation array
+                    fragmentation[i] = partitionSize[j] -= jobSize[i];
 
                     break;
                 }
 
-                // mod m will help in traversing the blocks from
-                // starting block after we reach the end.
-                j = (j + 1) % m;
+                j = (j + 1) % x;
             }
         }
 
         System.out.println(" Job #	    Job Size            Memory Size            Status              Fragmentation After Allocation");
-        for (int i = 0; i < n; i++)
-        {
+        for (int i = 0; i < y; i++) {
             System.out.print(" " + (i+1) + "              " +
-                    processSize[i] + "             " + memorySize[i]);
+                    jobSize[i] + "             " + memorySize[i]);
             if (allocation[i] != -1)
                 System.out.print("                       Busy");
             else
@@ -57,13 +52,13 @@ public class NextFit {
     }
 
 
-    // Driver program
+
     static public void main(String[] args) {
-        int blockSize[] = {5, 10, 20};
-        int processSize[] = {10, 20, 5};
-        int m = blockSize.length;
-        int n = processSize.length;
-        NextFit(blockSize, m, processSize, n);
+        int partitionSize[] = {100, 300, 200, 300, 700};
+        int jobSize[] = {212, 87, 112, 100};
+        int x = partitionSize.length;
+        int y = jobSize.length;
+        nextFit(partitionSize, x, jobSize, y);
     }
 
 }

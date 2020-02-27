@@ -4,56 +4,48 @@ public class BestFit {
 
 
 
-    static void bestFit(int blockSize[], int m, int processSize[],
-                        int n)
-    {
-        // Stores block id of the
-        // block allocated to a process
-        int allocation[] = new int[n];
+    static void bestFit(int partitionSize[], int x, int jobSize[], int y) {
 
-        int fragmentation[] = new int[n];
+        int allocation[] = new int[y];
 
-        int memorySize[] = new int[n];
+        int fragmentation[] = new int[y];
 
-        // Initially no block is assigned to any process
+        int memorySize[] = new int[y];
+
+        // Initially set all blocks as not assigned "-1"
         for (int i = 0; i < allocation.length; i++)
             allocation[i] = -1;
 
-        // pick each process and find suitable blocks
-        // according to its size ad assign to it
-        for (int i=0; i<n; i++)
-        {
+        // Loop through jobs and see which jobs size is less than the current partition size selected
+        for (int i=0; i<y; i++) {
             // Find the best fit block for current process
-            int bestIdx = -1;
-            for (int j=0; j<m; j++)
-            {
-                if (blockSize[j] >= processSize[i])
+            int bestIndex = -1;
+            for (int j=0; j<x; j++) {
+                if (partitionSize[j] >= jobSize[i])
                 {
-                    if (bestIdx == -1)
-                        bestIdx = j;
-                    else if (blockSize[bestIdx] > blockSize[j])
-                        bestIdx = j;
+                    if (bestIndex == -1)
+                        bestIndex = j;
+                    else if (partitionSize[bestIndex] > partitionSize[j])
+                        bestIndex = j;
                 }
             }
 
             // If we could find a block for current process
-            if (bestIdx != -1)
-            {
-                // allocate block j to p[i] process
-                allocation[i] = bestIdx;
+            if (bestIndex != -1) {
 
-                memorySize[i] = blockSize[bestIdx];
+                allocation[i] = bestIndex;
 
-                // Reduce available memory in this block.
-                fragmentation[i] = blockSize[bestIdx] -= processSize[i];
+                memorySize[i] = partitionSize[bestIndex];
+
+                // Add difference of specific allocation to fragmentation array
+                fragmentation[i] = partitionSize[bestIndex] -= jobSize[i];
             }
         }
 
         System.out.println(" Job #	    Job Size            Memory Size            Status              Fragmentation After Allocation");
-        for (int i = 0; i < n; i++)
-        {
+        for (int i = 0; i < y; i++) {
             System.out.print(" " + (i+1) + "              " +
-                    processSize[i] + "             " + memorySize[i]);
+                    jobSize[i] + "             " + memorySize[i]);
             if (allocation[i] != -1)
                 System.out.print("                       Busy");
             else
@@ -64,15 +56,13 @@ public class BestFit {
         System.out.println("Total Fragmentation: " + sum);
     }
 
-    // Driver Method
-    public static void main(String[] args)
-    {
-        int blockSize[] = {100, 500, 200, 300, 600};
-        int processSize[] = {212, 417, 112, 426};
-        int m = blockSize.length;
-        int n = processSize.length;
+    public static void main(String[] args) {
+        int partitionSize[] = {100, 300, 200, 300, 700};
+        int jobSize[] = {212, 87, 112, 100};
+        int x = partitionSize.length;
+        int y = jobSize.length;
 
-        bestFit(blockSize, m, processSize, n);
+        bestFit(partitionSize, x, jobSize, y);
     }
 
 }
