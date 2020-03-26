@@ -1,0 +1,52 @@
+The Page Removal Program requires three inputs"
+1. The number of frames
+2. The length of the reference input
+3. The integer contents of the reference input
+
+If the contents of the reference input is not an integer, the Program will exit out and you will have to restart with valid inputs
+
+The outputs you will recieve are:
+
+A graphical representaion of the memory at the end of the Page Removal using the designated Algorithm
+The Number of Hits
+The Number of Faults
+The Hit Ratio
+The Miss Ratio
+
+Inputs to show correctness for FIFO:
+
+Number of frames: 4
+Length of reference input: 13
+Contents of reference input: 7 0 1 2 0 3 0 4 2 3 0 3 2
+
+Output:
+
+  7  7  7  7  7  3  3  3  3  3  3  3  3
+ -1  0  0  0  0  0  0  4  4  4  4  4  4
+ -1 -1  1  1  1  1  1  1  1  1  0  0  0
+ -1 -1 -1  2  2  2  2  2  2  2  2  2  2
+The number of Hits: 6
+The number of Faults: 7
+Hit Ratio: 0.46153846
+Miss ratio: 0.53846157
+
+
+Inputs to show correctness for LRU:
+
+Number of frames: 4
+Length of reference input: 13
+Contents of reference input: 7 0 1 2 0 3 0 4 2 3 0 3 2
+
+Output:
+
+  7  7  7  7  7  3  3  3  3  3  3  3  3
+ -1  0  0  0  0  0  0  0  0  0  0  0  0
+ -1 -1  1  1  1  1  1  4  4  4  4  4  4
+ -1 -1 -1  2  2  2  2  2  2  2  2  2  2
+The number of Hits: 7
+The number of Faults: 6
+Hit Ratio: 0.53846157
+Miss ratio: 0.46153843
+
+Conclusion:
+LRU has a better Hit ratio when comapred to FIFO

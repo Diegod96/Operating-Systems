@@ -3,62 +3,88 @@ import java.util.*;
 
 public class LRU {
 
-    public static void main(String[] args) throws IOException
-    {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         // Declaring variables and data structures
-        int frames;
+        int numFrames = 0;
         int pointer = 0;
         int numHits = 0;
         int numFaults = 0;
-        int referenceLength;
-        boolean isFull = false;
-        int[] buffer;
-        ArrayList<Integer> stack = new ArrayList<Integer>();
+        int referenceLength = 0;
+        boolean isDone = false;
+        int[] bufferArray;
+        ArrayList<Integer> arrayList = new ArrayList<Integer>();
         int[] referenceString;
-        int[][] mem_layout;
+        int[][] memoryLayout;
 
 
-        // Request number of frames
-        System.out.println("Please enter the number of Frames: ");
-        frames = Integer.parseInt(br.readLine());
 
-        // Request length of reference string
-        System.out.println("Please enter the length of the Reference string: ");
-        referenceLength = Integer.parseInt(br.readLine());
+        // Check if number of frames is a number
+        // If not, let user know and restart program
+        try {
+            // Request number of frames
+            System.out.println("Please enter the number of Frames: ");
+            numFrames = Integer.parseInt(reader.readLine());
+        }
+        catch (NumberFormatException e){
+            System.out.println("User input is not a number!");
+            System.exit(0);
+        }
+
+
+        // Check if number if length of the reference string is a number
+        // If not, let user know and restart program
+        try {
+            // Request length of reference string
+            System.out.println("Please enter the length of the reference string: ");
+            referenceLength = Integer.parseInt(reader.readLine());
+        }
+        catch (NumberFormatException e){
+            System.out.println("User input is not a number!");
+            System.exit(0);
+        }
 
         // Set memory layout to the length of the reference string and # frames
         referenceString = new int[referenceLength];
-        mem_layout = new int[referenceLength][frames];
+        memoryLayout = new int[referenceLength][numFrames];
 
         // Buffer that fills all slots in memory initially with -1
-        buffer = new int[frames];
-        for(int j = 0; j < frames; j++)
-            buffer[j] = -1;
+        bufferArray = new int[numFrames];
+        for(int j = 0; j < numFrames; j++)
+            bufferArray[j] = -1;
 
-        // Request the reference string
-        System.out.println("Please enter the reference string: ");
-        for(int i = 0; i < referenceLength; i++) {
-            referenceString[i] = Integer.parseInt(br.readLine());
+
+        // Check if reference strings are a number
+        // If not, let user know and restart program
+        try {
+            // Request the reference string
+            System.out.println("Please enter the reference string: ");
+            for (int i = 0; i < referenceLength; i++) {
+                referenceString[i] = Integer.parseInt(reader.readLine());
+            }
+        }
+        catch (NumberFormatException e){
+            System.out.println("User input is not a number!");
+            System.exit(0);
         }
 
         System.out.println();
         for(int i = 0; i < referenceLength; i++) {
 
-            if(stack.contains(referenceString[i])) {
-                stack.remove((Integer) referenceString[i]);
+            if(arrayList.contains(referenceString[i])) {
+                arrayList.remove((Integer) referenceString[i]);
             }
 
-            stack.add(referenceString[i]);
+            arrayList.add(referenceString[i]);
 
             // Variable that is used to look for unused empty slots
-            int search = -1;
+            int searchIndex = -1;
 
             // For loop that loops through the frames and finds hits
-            for(int j = 0; j < frames; j++) {
-                if(buffer[j] == referenceString[i]) {
-                    search = j;
+            for(int j = 0; j < numFrames; j++) {
+                if(bufferArray[j] == referenceString[i]) {
+                    searchIndex = j;
                     numHits++;
                     break;
                 }
@@ -66,17 +92,14 @@ public class LRU {
 
             // Searches for slots in memory that still have -1
             // Moves pointer
-            if(search == -1) {
-                if(isFull) {
-                    int min_loc = referenceLength;
-                    for(int j = 0; j < frames; j++)
-                    {
-                        if(stack.contains(buffer[j]))
-                        {
-                            int temp = stack.indexOf(buffer[j]);
-                            if(temp < min_loc)
-                            {
-                                min_loc = temp;
+            if(searchIndex == -1) {
+                if(isDone) {
+                    int memoryLocation = referenceLength;
+                    for(int j = 0; j < numFrames; j++) {
+                        if(arrayList.contains(bufferArray[j])) {
+                            int temporaryIndex = arrayList.indexOf(bufferArray[j]);
+                            if(temporaryIndex < memoryLocation) {
+                                memoryLocation = temporaryIndex;
                                 pointer = j;
                             }
                         }
@@ -84,25 +107,24 @@ public class LRU {
                 }
 
                 // If condition fails then add a fault and iterate pointer
-                buffer[pointer] = referenceString[i];
+                bufferArray[pointer] = referenceString[i];
                 numFaults++;
                 pointer++;
 
-                // Hit the end of memory and finish LRU page replacement
-                if(pointer == frames)
-                {
+                // Hit the end of memory and finish LRU page removal
+                if(pointer == numFrames) {
                     pointer = 0;
-                    isFull = true;
+                    isDone = true;
                 }
             }
-            System.arraycopy(buffer, 0, mem_layout[i], 0, frames);
+            System.arraycopy(bufferArray, 0, memoryLayout[i], 0, numFrames);
         }
 
         // Print out end result of LRU page replacement
-        for(int i = 0; i < frames; i++)
+        for(int i = 0; i < numFrames; i++)
         {
             for(int j = 0; j < referenceLength; j++)
-                System.out.printf("%3d ",mem_layout[j][i]);
+                System.out.printf("%3d",memoryLayout[j][i]);
             System.out.println();
         }
 
