@@ -1,1 +1,4 @@
 To use the memory allocation programs, adjust the partition and job size in the main function.
+Your output will the jobs being entered to their partition, the size of the job, the memory size of the 
+selected partition, the status of the partition, and the fragmentation after allocation. At the
+end there is a total fragmentation for the entire process.
