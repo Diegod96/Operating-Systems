@@ -1,0 +1,8 @@
+To use the Sleeping Barber simulator you will have to enter the following:
+
+* Number of customers for the day
+* Number of seats for customers to wait in
+* Max and Min time interval for customers to arrive
+* Max and Min duration of a haircut
+
+At the end of execution there is a print out the number of customers served and the number of customers who left because they could not find a seat
